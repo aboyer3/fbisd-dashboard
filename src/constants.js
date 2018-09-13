@@ -1,0 +1,2 @@
+export const SET_ACTIVE_OPTION = 'SET_ACTIVE_OPTION';
+export const SET_MAP_OBJECT = 'SET_MAP_OBJECT';
