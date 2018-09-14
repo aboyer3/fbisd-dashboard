@@ -4,11 +4,12 @@ import mapboxgl from 'mapbox-gl'
 import { connect } from 'react-redux'
 import MapboxDraw from '@mapbox/mapbox-gl-draw'
 import * as turf from '@turf/turf'
-import { mapObjectAction } from '../actions/simpleAction.js'
+//import { mapObjectAction } from '../actions/simpleAction.js'
 
 
 // Don't forget to import the CSS
 import '@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css';
+import { mapObjectAction } from '../actions/simpleAction';
 
 mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmbDZmangifQ.-g_vE53SD2WrJ6tFX7QHmA';
 
@@ -16,13 +17,11 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4M29iazA2Z2gycXA4N2pmb
 
 let Map = class Map extends React.Component {
   map;
-
+  
 
   static propTypes = {
     data: PropTypes.object.isRequired,
-    active: PropTypes.object.isRequired,
     data2: PropTypes.object.isRequired,
-    dispatch: PropTypes.func.isRequired,
     mapObject: PropTypes.object.isRequired
   };
 
@@ -38,6 +37,8 @@ let Map = class Map extends React.Component {
       center: [ -95.4989, 29.5872 ],
       zoom: 10.22
     });
+
+    //this.props.mapObjectAction({"name":"Alex"});
 
     /* controls for drawing selection */
     var draw = new MapboxDraw({
@@ -72,7 +73,7 @@ let Map = class Map extends React.Component {
         type: 'fill',
         source: 'countries',
         paint:{
-          "fill-opacity":0.6,
+          "fill-opacity":0.6
       }
       });
       
@@ -178,9 +179,10 @@ let Map = class Map extends React.Component {
   } 
 
   setFill() {
-    //const { property, stops } = this.props.active;
     this.map.setPaintProperty('PASA', 'fill-color', {
       type:'categorical',
+      property: 'ELAZ_1819',
+      stops: mapStyle
     });
   }
 
@@ -188,6 +190,7 @@ let Map = class Map extends React.Component {
   
 
   render() {
+    this.props.mapObjectAction({"name2":"Alejandro"});
     return (
       <div className='contain col4'>
       <div ref={el => this.mapContainer = el} className="absolute top right left bottom" />
@@ -196,15 +199,71 @@ let Map = class Map extends React.Component {
   }
 }
   
-function mapStateToProps(state) {
+/*function mapStateToProps(state) {
   return {
     data: state.data,
     data2: state.data2,
     active: state.active,
     mapObject:state.mapObject
   };
-}
+}*/
 
-Map = connect(mapStateToProps)(Map);
+//Map = connect(mapStateToProps)(Map);
+
+
 
 export default Map;
+
+
+let mapStyle = [
+['Armstrong', '#3bb2d0'],
+['Austin Parkway', '#3bb2d0'],
+['Barrington Place', '#3bb2d0'],
+['Blue Ridge', '#3bb2d0'],
+['Brazos Bend', '#3bb2d0'],
+['Briargate', '#3bb2d0'],
+['Burton', '#50667f'],
+['Colony Bend', '#50667f'],
+['Colony Meadows', '#50667f'],
+['Commonwealth', '#50667f'],
+['Cornerstone', '#50667f'],
+['Drabek', '#50667f'],
+['Dulles', '#e55e5e'],
+['Fleming', '#e55e5e'],
+['Glover', '#e55e5e'],
+['Goodman', '#e55e5e'],
+['Heritage Rose', '#e55e5e'],
+['Highlands', '#e55e5e'],
+['Holley', '#f1f075'],
+['Hunters Glen', '#f1f075'],
+['Jones', '#f1f075'],
+['Jordan', '#f1f075'],
+['Lakeview', '#f1f075'],
+['Lantern Lane', '#f1f075'],
+['Leonetti', '#56b881'],
+['Lexington Creek', '#56b881'],
+['Madden', '#56b881'],
+['Meadows', '#56b881'],
+['Mission Bend', '#56b881'],
+['Mission Glen', '#56b881'],
+['Mission West', '#8a8acb'],
+['Neill', '#8a8acb'],
+['Oakland', '#8a8acb'],
+['Oyster Creek', '#8a8acb'],
+['Palmer', '#8a8acb'],
+['Parks', '#8a8acb'],
+['Patterson', '#41afa5'],
+['Pecan Grove', '#41afa5'],
+['Quail Valley', '#41afa5'],
+['Ridgegate', '#41afa5'],
+['Ridgemont', '#41afa5'],
+['Scanlan Oaks', '#41afa5'],
+['Schiff', '#3887be'],
+['Seguin', '#3887be'],
+['Settlers Way', '#3887be'],
+['Sienna Crossing', '#3887be'],
+['Sugar Mill', '#3887be'],
+['Sullivan', '#3887be'],
+['Townewest', '#41afa5'],
+['Walker Station', '#41afa5']
+];

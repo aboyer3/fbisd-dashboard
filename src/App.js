@@ -9,6 +9,7 @@ import configureStore from './store';
 import TemporaryDrawer from './components/appBar.js'
 import logo from './logo.svg';
 import './App.css';
+import MapContainer from './components/containers/mapContainer.js'
 
 
 class App extends Component {
@@ -18,7 +19,8 @@ class App extends Component {
       <div className="App">
       {/* <div> <TemporaryDrawer /></div> */}
         <div>
-          <Map />
+          {/* <Map /> */}
+          <MapContainer />
           {/* <Legend /> */}
         </div>
       </div>
